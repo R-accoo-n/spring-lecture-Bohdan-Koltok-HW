@@ -16,13 +16,13 @@ import org.springframework.stereotype.Repository;
  * Data access layer for Categories to save them into json file after articles been processed into categories.
  */
 @Repository
-public class CategoryRepository {
+public class CategoryJsonRepository {
     @Value("${CATEGORIES_FILE_}")
     private Path savePath;
     private final Gson gson;
 
     @Autowired
-    public CategoryRepository(Gson gson) {
+    public CategoryJsonRepository(Gson gson) {
         this.gson = gson;
     }
 

@@ -19,13 +19,13 @@ import org.springframework.stereotype.Repository;
  * Data access layer for Article entity to get them from json file using Gson library.
  */
 @Repository
-public class ArticleRepository {
+public class ArticleJsonRepository {
     @Value("${ARTICLES_FILE}")
     String articlesFile;
     private final Gson gson;
 
     @Autowired
-    public ArticleRepository(Gson gson) {
+    public ArticleJsonRepository(Gson gson) {
         this.gson = gson;
     }
 

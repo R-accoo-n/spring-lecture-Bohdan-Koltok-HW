@@ -17,7 +17,7 @@ public class NotificationEmailService implements NotificationService {
 
     @Override
     public void notifyUser(Long userId, String notification){
-        User currentUser = this.userService.getUserById(userId);
+        User currentUser = this.userService.getUserByIdFromJson(userId);
 
         if(currentUser.getNotificationType().equals(NotificationType.EMAIL)){
             System.out.println("Dear " + currentUser.getUsername() + ", you have new notification:\n" + notification);

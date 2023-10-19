@@ -1,7 +1,7 @@
 package co.inventorsoft.academy.spring.services;
 
 import co.inventorsoft.academy.spring.models.Article;
-import co.inventorsoft.academy.spring.repositories.CategoryRepository;
+import co.inventorsoft.academy.spring.repositories.CategoryJsonRepository;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,11 +22,11 @@ public class CategoriesService {
     @Value("${excluded.words}")
     private String stopWords;
 
-    private final CategoryRepository categoryRepository;
+    private final CategoryJsonRepository categoryJsonRepository;
 
     @Autowired
-    public CategoriesService(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public CategoriesService(CategoryJsonRepository categoryJsonRepository) {
+        this.categoryJsonRepository = categoryJsonRepository;
     }
 
     private Set<String> processArticlesIntoCategories(List<Article> articles){
@@ -64,7 +64,7 @@ public class CategoriesService {
 
     private void saveCategories(Set<String> categories){
         System.out.println(categories.toString());
-        this.categoryRepository.saveCategories(categories);
+        this.categoryJsonRepository.saveCategories(categories);
     }
 
     public void processCategories(List<Article> articles){

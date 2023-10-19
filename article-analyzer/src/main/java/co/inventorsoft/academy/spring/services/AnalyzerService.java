@@ -32,7 +32,7 @@ public class AnalyzerService {
     public void analyze(){
         this.categoriesService.processCategories(this.articleService.getAllArticles());
 
-        for (User user : this.userService.getAllUsers()){
+        for (User user : this.userService.getAllUsersFromJson()){
             if (user.getNotificationType().equals(NotificationType.EMAIL)) {
                 this.notificationEmailService.notifyUser(user.getId(),
                     "Your articles has been proceeded email");
