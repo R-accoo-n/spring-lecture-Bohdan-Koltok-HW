@@ -25,33 +25,29 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    @ResponseStatus(code = HttpStatus.OK)
+    @GetMapping()
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{user_id}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public User getUserById(@PathVariable("user_id") Long id) {
+    @GetMapping("/{userId}")
+    public User getUserById(@PathVariable("userId") Long id) {
         return userService.getUserById(id);
     }
 
-    @PostMapping("/")
+    @PostMapping()
     @ResponseStatus(code = HttpStatus.CREATED)
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
-    @PutMapping("/{user_id}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public User updateUser(@PathVariable("user_id") Long id, @RequestBody User user) {
+    @PutMapping("/{userId}")
+    public User updateUser(@PathVariable("userId") Long id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 
-    @DeleteMapping("/{user_id}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public void deleteUser(@PathVariable("user_id") Long id) {
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable("userId") Long id) {
         userService.deleteUserById(id);
     }
 }
