@@ -5,10 +5,14 @@ import co.inventorsoft.academy.spring.exceptions.ValidationException;
 import co.inventorsoft.academy.spring.models.User;
 import co.inventorsoft.academy.spring.repositories.UserJsonRepository;
 import co.inventorsoft.academy.spring.repositories.UserRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
@@ -17,7 +21,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserJsonRepository userJsonRepository;
     private final UserRepository userRepository;
 
@@ -101,4 +105,15 @@ public class UserService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email).orElseThrow();
+        List<String> roles = new ArrayList<>();
+        roles.add(user.getUserRole().toString());
+        return org.springframework.security.core.userdetails.User.builder()
+            .username(user.getEmail())
+            .password(user.getPassword())
+            .roles(roles.toArray(new String[0]))
+            .build();
+    }
 }

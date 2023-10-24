@@ -17,4 +17,5 @@ public class Configuration {
         return new GsonBuilder().create();
     }
 
+
 }

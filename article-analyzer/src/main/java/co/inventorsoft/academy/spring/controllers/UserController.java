@@ -1,10 +1,12 @@
 package co.inventorsoft.academy.spring.controllers;
 
 import co.inventorsoft.academy.spring.models.User;
+import co.inventorsoft.academy.spring.security.JwtUser;
 import co.inventorsoft.academy.spring.services.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,5 +51,16 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public void deleteUser(@PathVariable("userId") Long id) {
         userService.deleteUserById(id);
+    }
+
+    @GetMapping("/me")
+    public User getMyInfo(Authentication authentication) {
+        JwtUser jwtUser = (JwtUser) authentication.getPrincipal();
+        return userService.getUserByEmail(jwtUser.getEmail());
+    }
+
+    @GetMapping("/admin/info/{userId}")
+    public User getUserInfoById(@PathVariable("userId") Long id) {
+        return userService.getUserById(id);
     }
 }

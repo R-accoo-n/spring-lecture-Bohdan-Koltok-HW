@@ -1,5 +1,6 @@
 package co.inventorsoft.academy.spring.models;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -36,6 +37,8 @@ public class User {
     private Long id;
     @Column(name = "username", nullable = false)
     private String username;
+    @Column(name = "password", nullable = false)
+    private String password;
     @Column(name = "email", nullable = false, unique = true)
     private String email;
     @Column(name = "slack_id", nullable = false, unique = true)
@@ -43,4 +46,7 @@ public class User {
     @Column(name = "notification_type")
     @Enumerated(EnumType.STRING)
     private NotificationType notificationType;
+    @Column(name = "user_role")
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
 }
