@@ -10,8 +10,8 @@ public class Application {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(Application.class, args);
-		AnalyzerService analyzerService = context.getBean(AnalyzerService.class);
-		analyzerService.analyze();
+//		AnalyzerService analyzerService = context.getBean(AnalyzerService.class);
+//		analyzerService.analyze();
 
 
 	}
